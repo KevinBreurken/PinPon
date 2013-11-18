@@ -51,11 +51,11 @@ package objects
 		{
 			movement = 0;
 			if (up) {
-				movement = 5;
+				movement = 3;
 				mc.rotation = 180;
 			}
 			if (down) {
-				movement = -5;
+				movement = -3;
 				mc.rotation = 0;
 			}
 			Update(300, movement);
@@ -74,7 +74,7 @@ package objects
 			if (e.keyCode == 38) {
 				down = true;
 			}
-			if (e.keyCode == 40) {
+			if (e.keyCode == 40) {  
 				up = true;
 			}	
 			}

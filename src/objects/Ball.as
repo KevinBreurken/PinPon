@@ -3,6 +3,7 @@ package  objects
 	import flash.events.Event;
 	import utils.movement.staticOrbit;
 	import utils.calculate.Measure;
+	import utils.calculate.Random;
 	/**
 	 * ...
 	 * @author Jesse Stam
@@ -12,20 +13,26 @@ package  objects
 		public var mc:BallArt = new BallArt;
 		private var changeSpeedRadius:Number = 2;
 		public var updown:Boolean;
+		public var lasthitted:int = 0;
+		public var distance:int;
 		public function Ball() 
 		{
 			addChild(mc);
+			this.x = Globals.origin.x;
+			this.y = Globals.origin.y;
+			radius = 0;
 			addEventListener(Event.ENTER_FRAME, update);
 		}
 		public function update(e:Event):void 
 		{
+		distance = Measure.measureBetweenPoints(this.x, 500, this.y, 500);
 		if (radius < 1)
 		{
 			updown = false;
 			radius = 1;
 			angle += 180;
 			speed = 10;
-			changeSpeedRadius = (Math.random() * 2) + 0.2;
+			changeSpeedRadius = Random.randomRange(2, 5);
 		}
 		switch(updown)
 		{
@@ -41,14 +48,11 @@ package  objects
 		Update(radius, speed);	
 		
 		var rad:Number = angle * (Math.PI / 180); // Converting Degrees To Radians
-		var distance:int = Measure.measureBetweenPoints(this.x, 500, this.y, 500);
 			if (isball) {
 				if (distance <= 50) {
-					trace("IN");
 					losegravity = false;
 				}
 				else {
-					trace("OUT");
 					losegravity = true;
 				}
 				angle -= speed;
@@ -58,12 +62,12 @@ package  objects
 				}
 				else {
 				if(updown){
-					this.x -= 5 * Math.cos(this.rotation * Math.PI/180);
-					this.y -= 5 * Math.sin(this.rotation * Math.PI / 180);
+					this.x -= 8 * Math.cos(this.rotation * Math.PI/180);
+					this.y -= 8 * Math.sin(this.rotation * Math.PI / 180);
 					}
 					else {
-					this.x+= 5 * Math.cos(this.rotation * Math.PI/180);
-					this.y += 5 * Math.sin(this.rotation * Math.PI / 180);
+					this.x += 8 * Math.cos(this.rotation * Math.PI/180);
+					this.y += 8 * Math.sin(this.rotation * Math.PI / 180);
 					}
 				}
 			}

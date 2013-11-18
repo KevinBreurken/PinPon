@@ -27,6 +27,9 @@ package gamestate
 				case "Credits":
 					currentstate = new Credits(this);
 				break;
+				case "Credits":
+					currentstate = new GameChoose(this);
+				break;
 			}
 			addChild(currentstate);
 		}

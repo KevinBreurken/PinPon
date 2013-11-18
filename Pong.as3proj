@@ -58,11 +58,12 @@
     <element path="lib\Menu\OptionsButton.swc" />
     <element path="lib\Game\PlayerPanelArt01.swc" />
     <element path="lib\Game\PlayerPanelArt02.swc" />
-    <element path="lib\Game\GameBackground.swc" />
     <element path="lib\Game\WhirlPool.swc" />
     <element path="lib\Game\ScoreBoard.swc" />
     <element path="lib\Credits\CreditsScreen.swc" />
     <element path="lib\Game\HitBox.swc" />
+    <element path="lib\Game\GameBackground2.swc" />
+    <element path="lib\BackButton.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>
