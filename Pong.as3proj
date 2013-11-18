@@ -64,6 +64,12 @@
     <element path="lib\Game\HitBox.swc" />
     <element path="lib\Game\GameBackground2.swc" />
     <element path="lib\BackButton.swc" />
+    <element path="lib\ModeSelect\ModeBackground.swc" />
+    <element path="lib\ModeSelect\EndlessButton.swc" />
+    <element path="lib\ModeSelect\DownButton.swc" />
+    <element path="lib\ModeSelect\UpButton.swc" />
+    <element path="lib\Options\OptionsBackground.swc" />
+    <element path="lib\Options\OptionsSlider.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

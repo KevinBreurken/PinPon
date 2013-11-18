@@ -17,10 +17,11 @@ package gamestate
 			gamestatemanager = manager;
 			addChild(creditsscreen);
 			addChild(backbutton);
-			backbutton.y = -50;
+			backbutton.y = 0;
 			backbutton.addEventListener(MouseEvent.CLICK, toMenu);
 		}
 		private function toMenu(e:MouseEvent):void {
+			gamestatemanager.musicmanager.playSound("Gong");
 			removeChild(creditsscreen);
 			removeChild(backbutton);
 			gamestatemanager.switchGamestate("Menu");

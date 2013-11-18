@@ -51,11 +51,11 @@ package objects
 		{
 			movement = 0;
 			if (up) {
-				movement = 3;
+				movement = 5;
 				mc.rotation = 180;
 			}
 			if (down) {
-				movement = -3;
+				movement = -5;
 				mc.rotation = 0;
 			}
 			Update(300, movement);

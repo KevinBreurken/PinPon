@@ -9,28 +9,65 @@ package utils.loaders
 	 */
 	public class SoundPlayer extends Sound
 	{
-		private var sound:Sound = new Sound();
-		private var channel:SoundChannel = new SoundChannel();
-		private var _playing:Boolean = false;
+		private var sfxmuted:Boolean = false;
+		private var bgmmuted:Boolean = false;
+		[Embed(source="../../../lib/Gong.mp3")]
+		private var gongSound : Class; 		 
+		private var gongmusic : Sound;
 		
-		public function SoundPlayer($url:String, $volum:int)
-		{
-			$volum = $volum / 100;
-			sound.load(new URLRequest($url));
-			channel = sound.play(0,$volum, null);
-			_playing = true
-			
-		}
+		[Embed(source = "../../../lib/blub.mp3")]
+		private var blubSound : Class; 		 
+		private var blubmusic : Sound;
 		
-		public function stopS():void
+		[Embed(source="../../../lib/zenmusic_fix.mp3")]
+		private var musicSound : Class; 		 
+		private var musicmusic : Sound;
+		
+		
+		private var sfxChannel : SoundChannel;
+		private var bgmChannel : SoundChannel;
+		public function SoundPlayer()
 		{
-			channel.stop();
-			_playing=false
+			musicmusic = (new musicSound) as Sound;
+			gongmusic = (new gongSound) as Sound;
+			blubmusic = (new blubSound) as Sound;
+			sfxChannel = new SoundChannel();
+			bgmChannel = new SoundChannel();
+			bgmChannel = musicmusic.play(0, int.MAX_VALUE);
 		}
-		public function get playing():Boolean 
-		{
-			return _playing;
+		public function playSound(name:String):void {
+			if(!sfxmuted){
+			switch(name) {
+				case "Gong":
+					sfxChannel = gongmusic.play();
+				break;
+				case "Blub":
+					sfxChannel = blubmusic.play();
+				break;
+			}
+			}
 		}
+		public function changeVolume(type:String,bgmstate:Boolean,sfxstate:Boolean):void {
+			switch(type) {
+				case"sfx":
+					if (!sfxstate) {
+						sfxmuted = true;
+					}
+					else {
+						sfxmuted = false;
+					}
+				break;
+				case"bgm":
+					if (!bgmstate) {
+						bgmChannel.stop();
+					}
+					else {
+						bgmChannel = musicmusic.play(0, int.MAX_VALUE);
+					}
+				break;
+			}
+		}
+
 	}
 
 }

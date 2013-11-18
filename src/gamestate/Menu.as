@@ -18,7 +18,6 @@ package gamestate
 		public function Menu(manager:GamestateManager) 
 		{
 			gamestatemanager = manager;
-			
 			addChild(menubackground);
 			addChild(startbutton);
 			addChild(optionsbutton);
@@ -34,16 +33,19 @@ package gamestate
 		}
 		private function openGame(e:MouseEvent):void 
 		{
+			gamestatemanager.musicmanager.playSound("Gong");
 			unloadMenu();
-			gamestatemanager.switchGamestate("Game");
+			gamestatemanager.switchGamestate("GameChoose");
 		}
 		private function openCredits(e:MouseEvent):void 
 		{
+			gamestatemanager.musicmanager.playSound("Gong");
 			unloadMenu();
 			gamestatemanager.switchGamestate("Credits");
 		}
 		private function openOptions(e:MouseEvent):void 
 		{
+			gamestatemanager.musicmanager.playSound("Gong");
 			unloadMenu();
 			gamestatemanager.switchGamestate("Options");
 		}

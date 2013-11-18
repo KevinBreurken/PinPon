@@ -80,12 +80,14 @@ package gamestate
 			whitescoretext.textColor = hex;
 			
 			addChild(backbutton);
-			backbutton.x = 600;
-			backbutton.y = 850;
+			backbutton.x = 0;
+			backbutton.y = -10;
 			backbutton.addEventListener(MouseEvent.CLICK, toMenu);
 			addEventListener(Event.ENTER_FRAME, update);
 		}
+		
 		private function toMenu(e:MouseEvent):void {
+			gamestatemanager.musicmanager.playSound("Gong");
 			backbutton.removeEventListener(MouseEvent.CLICK, toMenu);
 			removeEventListener(Event.ENTER_FRAME, update);
 			removeChild(backbutton);
@@ -101,10 +103,19 @@ package gamestate
 		}
 		private function update(e:Event):void 
 		{
+			if (gamestatemanager.endless) {
+				
+			}
+			else {
+				if (whitescore == gamestatemanager.pointstillwin || blackscore == gamestatemanager.pointstillwin) {
+					toMenu(null);
+				}
+			}
 			whitescoretext.text = "" + whitescore;
 			blackscoretext.text = "" + blackscore;
 			
 			if (ball.distance >= 300) {
+				gamestatemanager.musicmanager.playSound("Blub");
 				switch(ball.lasthitted) {
 				case 1:
 					whitescore++;
