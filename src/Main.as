@@ -6,7 +6,7 @@ package {
 	import flash.media.Sound;
 	import flash.media.SoundChannel;
 	import gamestate.Game;
-	import gamestate.gameStateManager;
+	import gamestate.GameStateManager;
 	import gamestate.Menu;
 	import utils.loaders.SoundPlayer;
 	
