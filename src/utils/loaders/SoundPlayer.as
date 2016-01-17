@@ -1,16 +1,14 @@
-package utils.loaders 
-{
+package utils.loaders {
+
 	import flash.media.Sound;
 	import flash.media.SoundChannel;
 	import flash.net.URLRequest;
-	/**
-	 * ...
-	 * @author Jesse Stam
-	 */
-	public class SoundPlayer extends Sound
-	{
-		private var sfxmuted:Boolean = false;
-		private var bgmmuted:Boolean = false;
+
+	public class SoundPlayer extends Sound {
+	
+		private var sfxmuted : Boolean = false;
+		private var bgmmuted : Boolean = false;
+		
 		[Embed(source="../../../lib/Gong.mp3")]
 		private var gongSound : Class; 		 
 		private var gongmusic : Sound;
@@ -26,46 +24,76 @@ package utils.loaders
 		
 		private var sfxChannel : SoundChannel;
 		private var bgmChannel : SoundChannel;
-		public function SoundPlayer()
-		{
+		
+		public function SoundPlayer() {
+		
 			musicmusic = (new musicSound) as Sound;
 			gongmusic = (new gongSound) as Sound;
 			blubmusic = (new blubSound) as Sound;
 			sfxChannel = new SoundChannel();
 			bgmChannel = new SoundChannel();
 			bgmChannel = musicmusic.play(0, int.MAX_VALUE);
+			
 		}
-		public function playSound(name:String):void {
+		
+		public function playSound ( name : String ) : void {
+		
 			if(!sfxmuted){
-			switch(name) {
-				case "Gong":
-					sfxChannel = gongmusic.play();
-				break;
-				case "Blub":
-					sfxChannel = blubmusic.play();
-				break;
+			
+				switch(name) {
+				
+					case "Gong":
+					
+						sfxChannel = gongmusic.play();
+						
+					break;
+					
+					case "Blub":
+					
+						sfxChannel = blubmusic.play();
+						
+					break;
+					
+				}
+				
 			}
-			}
+			
 		}
-		public function changeVolume(type:String,bgmstate:Boolean,sfxstate:Boolean):void {
+		
+		public function changeVolume ( type : String , bgmstate : Boolean , sfxstate : Boolean ) : void {
+		
 			switch(type) {
+			
 				case"sfx":
+				
 					if (!sfxstate) {
+					
 						sfxmuted = true;
-					}
-					else {
+						
+					} else {
+					
 						sfxmuted = false;
+						
 					}
+					
 				break;
+				
 				case"bgm":
+				
 					if (!bgmstate) {
+					
 						bgmChannel.stop();
-					}
-					else {
+						
+					} else {
+					
 						bgmChannel = musicmusic.play(0, int.MAX_VALUE);
+						
 					}
+					
 				break;
+				
 			}
+			
 		}
 
 	}

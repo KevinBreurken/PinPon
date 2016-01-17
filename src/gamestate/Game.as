@@ -1,5 +1,5 @@
-package gamestate 
-{
+package gamestate {
+
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -7,12 +7,9 @@ package gamestate
 	import flash.text.TextFormat;
 	import objects.Ball;
 	import objects.PlayerPanel;
-	/**
-	 * ...
-	 * @author Jesse Stam
-	 */
-	public class Game extends MovieClip
-	{
+
+	public class Game extends MovieClip {
+	
 		[Embed(source="../../lib/narkisim.ttf",
 		fontName = "myFont", 
 		mimeType = "application/x-font", 
@@ -20,34 +17,45 @@ package gamestate
 		fontStyle="normal", 
 		advancedAntiAliasing="true", 
 		embedAsCFF="false")]
-		private var myEmbeddedFont:Class;
-		private var textformat:TextFormat = new TextFormat( "myFont", 70 );
 		
-		private var gamestatemanager:GamestateManager;
-		private var ball:Ball = new Ball();
+		private var myEmbeddedFont : Class;
+		private var textformat : TextFormat = new TextFormat( "myFont", 70 );
 		
-		private var playerone:PlayerPanel;
-		private var playertwo:PlayerPanel;
+		private var gamestatemanager : GamestateManager;
+		private var ball : Ball = new Ball();
 		
-		private var background:GameBackground = new GameBackground;
-		private var whirlpool:WhirlPool = new WhirlPool;
-		private var scoreboard:ScoreBoard = new ScoreBoard;
+		private var playerone : PlayerPanel;
+		private var playertwo : PlayerPanel;
 		
-		private var blackscore:int;
-		private var blackscoretext:TextField = new TextField();
-		private var whitescore:int;
-		private var whitescoretext:TextField = new TextField();
+		private var background : GameBackground = new GameBackground;
+		private var whirlpool : WhirlPool = new WhirlPool;
+		private var scoreboard : ScoreBoard = new ScoreBoard;
 		
-		private var backbutton:BackButton = new BackButton();
-		public function Game(manager:GamestateManager) 
-		{
+		private var blackscore : int;
+		private var blackscoretext : TextField = new TextField();
+		private var whitescore : int;
+		private var whitescoretext : TextField = new TextField();
+		
+		private var backbutton : BackButton = new BackButton();
+		
+		public function Game ( manager : GamestateManager) {
+		
 			gamestatemanager = manager;
-			if (stage) init();
-			else addEventListener(Event.ADDED_TO_STAGE, init);
+		
+			if (stage){
+			
+				init();
+				
+			} else {
+			
+				addEventListener(Event.ADDED_TO_STAGE, init);
+			
+			}
+			
 		}
 		
-		private function init(e:Event = null):void 
-		{
+		private function init ( e : Event = null ) : void {
+		
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			addChild(background);
 			addChild(scoreboard);
@@ -72,11 +80,14 @@ package gamestate
 			whitescoretext.y = 50;
 			blackscoretext.x = 245;
 			blackscoretext.y = 55;
+			
 			whitescoretext.defaultTextFormat = textformat;
 			whitescoretext.embedFonts = true;
+			
 			blackscoretext.defaultTextFormat = textformat;
 			blackscoretext.embedFonts = true;
-			var hex:int = parseInt("FFFFFF", 16);
+			
+			var hex : int = parseInt("FFFFFF", 16);
 			whitescoretext.textColor = hex;
 			
 			addChild(backbutton);
@@ -84,10 +95,13 @@ package gamestate
 			backbutton.y = -10;
 			backbutton.addEventListener(MouseEvent.CLICK, toMenu);
 			addEventListener(Event.ENTER_FRAME, update);
+			
 		}
 		
-		private function toMenu(e:MouseEvent):void {
+		private function toMenu ( e : MouseEvent ) : void {
+		
 			gamestatemanager.musicmanager.playSound("Gong");
+			
 			backbutton.removeEventListener(MouseEvent.CLICK, toMenu);
 			removeEventListener(Event.ENTER_FRAME, update);
 			removeChild(backbutton);
@@ -100,47 +114,66 @@ package gamestate
 			removeChild(whitescoretext);
 			removeChild(scoreboard);
 			gamestatemanager.switchGamestate("Menu");
+			
 		}
-		private function update(e:Event):void 
-		{
+		
+		private function update ( e : Event ) : void {
+		
 			if (gamestatemanager.endless) {
 				
-			}
-			else {
+			} else {
+			
 				if (whitescore == gamestatemanager.pointstillwin || blackscore == gamestatemanager.pointstillwin) {
+				
 					toMenu(null);
+					
 				}
+				
 			}
+			
 			whitescoretext.text = "" + whitescore;
 			blackscoretext.text = "" + blackscore;
 			
 			if (ball.distance >= 300) {
+			
 				gamestatemanager.musicmanager.playSound("Blub");
+				
 				switch(ball.lasthitted) {
+				
 				case 1:
 					whitescore++;
 				break;
+				
 				case 2:
 					blackscore++;
 				break;
+				
 				}
+				
 				newBall();
+				
 			}
+			
 			if (playerone.hitbox.hitTestPoint(ball.x,ball.y,true)) {
+			
 				ball.speed = -ball.speed;
 				ball.updown = true;
 				ball.lasthitted = 1;
+				
 			}
 			
 			if (playertwo.hitbox.hitTestPoint(ball.x,ball.y,true)) {
+			
 				ball.speed = -ball.speed;
 				ball.updown = true;
 				ball.lasthitted = 2;
+				
 			}
 			
 		}
 		
-		private function newBall():void {
+		private function newBall () : void {
+		
 			removeChild(ball);
 			ball.removeEventListener(Event.ENTER_FRAME, update);
 			addChild(ball);
@@ -149,6 +182,7 @@ package gamestate
 			ball.y = Globals.origin.y;
 			ball.isball = true;
 			ball.radius = 0;
+			
 		}
 		
 	}

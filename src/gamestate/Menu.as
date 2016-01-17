@@ -1,22 +1,19 @@
-package gamestate 
-{
+package gamestate {
+
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
-	/**
-	 * ...
-	 * @author Kevin Breurken
-	 */
-	public class Menu extends MovieClip
-	{
-		private var gamestatemanager:GamestateManager;
+
+	public class Menu extends MovieClip {
+	
+		private var gamestatemanager : GamestateManager;
 		
-		private var menubackground:MenuBackground = new MenuBackground;
-		private var startbutton:StartButton = new StartButton;
-		private var optionsbutton:OptionsButton = new OptionsButton;
-		private var creditsbutton:CreditsButton = new CreditsButton;
+		private var menubackground : MenuBackground = new MenuBackground;
+		private var startbutton : StartButton = new StartButton;
+		private var optionsbutton : OptionsButton = new OptionsButton;
+		private var creditsbutton : CreditsButton = new CreditsButton;
 		
-		public function Menu(manager:GamestateManager) 
-		{
+		public function Menu ( manager : GamestateManager ) {
+		
 			gamestatemanager = manager;
 			addChild(menubackground);
 			addChild(startbutton);
@@ -30,33 +27,46 @@ package gamestate
 			startbutton.addEventListener(MouseEvent.CLICK, openGame);
 			optionsbutton.addEventListener(MouseEvent.CLICK, openOptions);
 			creditsbutton.addEventListener(MouseEvent.CLICK, openCredits);
+			
 		}
-		private function openGame(e:MouseEvent):void 
-		{
+		
+		private function openGame ( e : MouseEvent ) : void {
+		
 			gamestatemanager.musicmanager.playSound("Gong");
 			unloadMenu();
 			gamestatemanager.switchGamestate("GameChoose");
+			
 		}
-		private function openCredits(e:MouseEvent):void 
-		{
+		
+		private function openCredits ( e : MouseEvent ) : void {
+		
 			gamestatemanager.musicmanager.playSound("Gong");
 			unloadMenu();
 			gamestatemanager.switchGamestate("Credits");
+			
 		}
-		private function openOptions(e:MouseEvent):void 
-		{
+		
+		private function openOptions ( e : MouseEvent ) : void {
+		
 			gamestatemanager.musicmanager.playSound("Gong");
 			unloadMenu();
 			gamestatemanager.switchGamestate("Options");
+			
 		}
-		private function unloadMenu():void {
+		
+		private function unloadMenu() : void {
+		
 			while (this.numChildren > 0){ this.removeChildAt(0); }
+			
 		}
-		private function setPosition(mc:MovieClip, x:int, y:int):void 
-		{
+		
+		private function setPosition ( mc : MovieClip , x : int , y : int ) : void {
+		
 			mc.x = x;
 			mc.y = y;
+			
 		}
+		
 	}
 
 }
